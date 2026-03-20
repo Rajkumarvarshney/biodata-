@@ -1,67 +1,93 @@
 import React from 'react';
+import { fontMap } from '../../utils/fontMap';
+import { getScaleParams } from '../../utils/scaleParams';
+import { translations } from '../../utils/lang';
 
-export default function BloomTemplate({ data, theme }) {
-    const { name, fields, photo } = data;
-    const dynamicBg = theme?.background || "#f0f9ff";
-    const dynamicPrimary = theme?.primary || "#4a6c8c";
+export default function BloomTemplate({ data, theme, font, lang = 'en', invocation = '' }) {
+    const { name, fields = [], photo } = data;
+    const dynamicBg = theme?.background || "#fffaff";
+    const dynamicPrimary = theme?.primary || "#db2777";
+    const t = translations[lang] || translations.en;
+
+    const { fontSize, nameSize, photoSize, gap, padding } = getScaleParams(fields.length);
 
     return (
         <div
-            className="w-full min-h-[600px] p-8 sm:p-12 rounded-3xl relative text-center shadow-md border border-sky-100 overflow-hidden animate-fade-in-up transition-colors duration-500"
-            style={{ backgroundColor: dynamicBg }}
+            className="w-full h-full relative overflow-hidden transition-all duration-700 flex flex-col cursor-default"
+            style={{
+                backgroundColor: dynamicBg,
+                fontFamily: fontMap[font] || "'Playfair Display', serif",
+                padding: `${padding}px`,
+                fontSize: `${fontSize}px`,
+            }}
         >
-
-            {/* Decorative Blobs */}
-            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[40%] bg-blue-200/40 rounded-full blur-[80px] pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[50%] bg-pink-200/30 rounded-full blur-[100px] pointer-events-none" />
-
-            {/* Photo */}
-            <div className="relative w-40 h-40 mx-auto mt-4 mb-8">
-                <div className="absolute inset-0 bg-gradient-to-tr from-sky-300 to-indigo-300 rounded-full animate-pulse opacity-50 blur-md"></div>
-                <div className="relative w-full h-full rounded-full bg-white border-4 border-white shadow-xl flex items-center justify-center overflow-hidden z-10 transition-transform hover:scale-105 duration-300">
-                    {photo ? (
-                        <img src={photo} alt="Profile" className="w-full h-full object-cover" />
-                    ) : (
-                        <div className="flex flex-col items-center justify-center gap-1">
-                            <span className="text-slate-300">
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            </span>
-                            <span className="text-slate-400 font-medium tracking-widest uppercase text-xs">Photo</span>
-                        </div>
-                    )}
-                </div>
+            {/* Floral Decorative SVGs */}
+            <div className="absolute top-[-2%] right-[-5%] w-[40%] text-pink-200/40 rotate-12 pointer-events-none">
+                <svg viewBox="0 0 200 200" fill="currentColor"><path d="M100,20 C120,50 150,50 180,20 C150,80 150,110 180,170 C140,140 110,140 70,170 C100,110 100,80 70,20 C90,50 110,50 130,20" /></svg>
+            </div>
+            <div className="absolute bottom-[-5%] left-[-5%] w-[50%] text-sky-200/30 -rotate-12 pointer-events-none">
+                <svg viewBox="0 0 200 200" fill="currentColor"><path d="M100,20 C120,50 150,50 180,20 C150,80 150,110 180,170 C140,140 110,140 70,170 C100,110 100,80 70,20 C90,50 110,50 130,20" /></svg>
             </div>
 
-            {/* Name */}
-            <h1
-                className="text-4xl font-extrabold drop-shadow-sm mb-2 relative z-10 tracking-tight transition-colors duration-500"
-                style={{ color: dynamicPrimary }}
-            >
-                {name || "Your Name"}
-            </h1>
+            {/* Inner Border Frame */}
+            <div className="absolute inset-4 border border-pink-100 rounded-[2rem] pointer-events-none z-0" />
 
-            {/* Details Card */}
-            <div className="mt-10 mx-auto max-w-xl bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/80 text-left relative z-10 transition-all hover:shadow-md">
+            {/* Invocation */}
+            <div className="text-center mb-4 z-10 relative">
+                <p className="font-bold tracking-[0.3em] uppercase opacity-40 text-[9px]" style={{ color: dynamicPrimary }}>
+                    {invocation}
+                </p>
+            </div>
 
-                <div className="flex flex-col gap-5">
-                    {fields && fields.map((field, index) => (
-                        <div
-                            key={field.id}
-                            className={`flex flex-col sm:flex-row sm:items-center ${index !== fields.length - 1 ? 'border-b border-sky-100/50 pb-4' : 'pb-1'} gap-1 sm:gap-6 group`}
-                        >
+            {/* Header: Photo and Name */}
+            <div className="flex flex-col items-center text-center mb-8 z-10 relative">
+                {photo && (
+                    <div className="relative mb-6" style={{ width: photoSize * 1.4, height: photoSize * 1.4 }}>
+                        <div className="absolute inset-0 bg-pink-100 rounded-full scale-110 blur-xl opacity-50" />
+                        <div className="w-full h-full rounded-full border-8 border-white shadow-2xl overflow-hidden relative z-10">
+                            <img src={photo} alt="" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
+                )}
+
+                <h1
+                    className="font-black tracking-tighter leading-none mb-1 drop-shadow-sm italic"
+                    style={{ color: dynamicPrimary, fontSize: nameSize }}
+                >
+                    {name || t.labels.name}
+                </h1>
+                <div className="h-0.5 w-16 bg-gradient-to-r from-transparent via-pink-300 to-transparent mx-auto opacity-50" />
+                <p className="uppercase tracking-[0.4em] text-[10px] font-bold mt-2 opacity-30 italic">{t.title}</p>
+            </div>
+
+            {/* Content Grid */}
+            <div className="flex-1 z-10 relative px-6 w-full max-w-2xl mx-auto overflow-hidden">
+                <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                    {fields.map((field) => (
+                        <div key={field.id} className="flex flex-col border-b border-pink-50 pb-1.5 transition-all hover:translate-x-1">
                             <span
-                                className="sm:w-1/3 text-xs font-bold uppercase tracking-widest pt-1 transition-colors duration-500"
-                                style={{ color: dynamicPrimary, opacity: 0.8 }}
+                                className="font-black uppercase tracking-widest opacity-40 mb-1"
+                                style={{ color: dynamicPrimary, fontSize: fontSize * 0.7 }}
                             >
-                                {field.label || "Custom Field"}
+                                {t.labels[field.label.toLowerCase().replace(/\s+/g, '_')] || field.label}
                             </span>
-                            <span className="sm:w-2/3 text-lg text-[#334b61] font-medium leading-tight">
-                                {field.value || "-"}
+                            <span className="font-bold text-slate-800 tracking-tight" style={{ fontSize: fontSize }}>
+                                {field.value || "—"}
                             </span>
                         </div>
                     ))}
                 </div>
+            </div>
 
+            {/* Footer */}
+            <div className="mt-auto pt-8 flex justify-between items-end opacity-20 z-10 relative">
+                <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full border-2 border-slate-900 flex items-center justify-center font-black text-[10px]">M</div>
+                    <span className="text-[10px] font-black tracking-widest uppercase">MarryBuilder Premium</span>
+                </div>
+                <div className="flex gap-1">
+                    {[1, 2, 3].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-pink-400" />)}
+                </div>
             </div>
         </div>
     );

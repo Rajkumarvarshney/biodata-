@@ -1,40 +1,51 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer");
 
-/**
- * Service to generate PDFs of templates using Puppeteer.
- * Taking an HTML string/URL and rendering it into a high-quality PDF.
- */
-class PDFService {
-    async generatePDF(htmlContent, options = {}) {
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox']
-        });
+async function generatePDF(image) {
+    const browser = await puppeteer.launch({
+        headless: "new",
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
 
-        const page = await browser.newPage();
+    const page = await browser.newPage();
 
-        // Evaluate HTML content
-        await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    // Set A4 viewport size (210mm × 297mm at 96dpi ≈ 794 × 1123px)
+    await page.setViewport({ width: 794, height: 1123 });
 
-        // Emulate standard screen for accurate rendering
-        await page.emulateMediaType('screen');
+    // Inject the captured image — guaranteed pixel-perfect match to the UI
+    await page.setContent(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          html, body { 
+            width: 794px; 
+            height: 1123px; 
+            overflow: hidden;
+            background: white;
+          }
+          img { 
+            width: 100%; 
+            height: 100%;
+            display: block; 
+            object-fit: contain;
+          }
+        </style>
+      </head>
+      <body>
+        <img src="${image}" />
+      </body>
+    </html>
+  `, { waitUntil: "networkidle0" });
 
-        // Generate output
-        const pdfBuffer = await page.pdf({
-            format: 'A4',
-            printBackground: true,
-            margin: {
-                top: '10mm',
-                bottom: '10mm',
-                right: '10mm',
-                left: '10mm'
-            },
-            ...options
-        });
+    const pdf = await page.pdf({
+        format: "A4",
+        printBackground: true,
+        margin: { top: 0, bottom: 0, left: 0, right: 0 },
+    });
 
-        await browser.close();
-        return pdfBuffer;
-    }
+    await browser.close();
+    return pdf;
 }
 
-module.exports = new PDFService();
+module.exports = { generatePDF };

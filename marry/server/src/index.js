@@ -21,10 +21,30 @@ app.get('/', (req, res) => {
     res.json({ message: 'Marriage Biodata Builder API is running.' });
 });
 
-// route placeholders
-// app.use('/api/templates', require('./routes/templateRoutes'));
-// app.use('/api/pdf', require('./routes/pdfRoutes'));
-// app.use('/api/upload', require('./routes/uploadRoutes'));
+// Import services
+const { generatePDF } = require('./services/pdfService');
+
+app.post('/api/generate-pdf', async (req, res) => {
+    try {
+        const { html } = req.body;
+        if (!html) {
+            return res.status(400).json({ error: 'HTML content is required.' });
+        }
+
+        const pdfBuffer = await generatePDF(html);
+
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': 'attachment; filename="biodata.pdf"',
+            'Content-Length': pdfBuffer.length
+        });
+
+        res.send(pdfBuffer);
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        res.status(500).json({ error: 'Failed to generate PDF' });
+    }
+});
 
 // error handler middleware placeholder
 // app.use(require('./utils/errorHandler'));
