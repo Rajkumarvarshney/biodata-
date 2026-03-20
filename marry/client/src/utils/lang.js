@@ -148,5 +148,105 @@ export const translations = {
             address: "पता",
             hobbies: "शौक"
         }
+    },
+    ur: {
+        title: "شادی کا بائیو ڈیٹا",
+        invocation: "|| بسم اللہ الرحمن الرحیم ||",
+        labels: {
+            details: "بائیو ڈیٹا کی تفصیلات",
+            add_field: "+ فیلڈ شامل کریں",
+            generate: "ڈاؤن لوڈ",
+            name: "مکمل نام",
+            photo: "تصویر",
+            age: "عمر",
+            height: "قد",
+            date_of_birth: "تاریخ پیدائش",
+            place_of_birth: "جائے پیدائش",
+            caste: "ذات/برادری",
+            phone: "فون نمبر",
+            education: "تعلیم",
+            occupation: "پیشہ",
+            income: "آمدنی",
+            "father's_occupation": "والد کا پیشہ",
+            "mother's_occupation": "والدہ کا پیشہ",
+            siblings: "بہن بھائی",
+            address: "پتہ",
+            hobbies: "مشاغل"
+        }
+    },
+    pa: {
+        title: "ਵਿਆਹ ਦਾ ਬਾਇਓਡਾਟਾ",
+        invocation: "|| ੴ ਸਤਿਗੁਰ ਪ੍ਰਸਾਦਿ ||",
+        labels: {
+            details: "ਬਾਇਓਡਾਟਾ ਜਾਣਕਾਰੀ",
+            add_field: "+ ਨਵੀਂ ਜਾਣਕਾਰੀ ਜੋੜੋ",
+            generate: "ਡਾਊਨਲੋਡ",
+            name: "ਪੂਰਾ ਨਾਮ",
+            photo: "ਫੋਟੋ",
+            age: "ਉਮਰ",
+            height: "ਕੱਦ",
+            date_of_birth: "ਜਨਮ ਮਿਤੀ",
+            place_of_birth: "ਜਨਮ ਸਥਾਨ",
+            caste: "ਜਾਤ",
+            phone: "ਫੋਨ ਨੰਬਰ",
+            education: "ਵਿੱਦਿਆ",
+            occupation: "ਕੰਮਕਾਰ",
+            income: "ਆਮਦਨ",
+            "father's_occupation": "ਪਿਤਾ ਦਾ ਕੰਮਕਾਰ",
+            "mother's_occupation": "ਮਾਤਾ ਦਾ ਕੰਮਕਾਰ",
+            siblings: "ਭੈਣ-ਭਰਾ",
+            address: "ਪਤਾ",
+            hobbies: "ਸ਼ੌਂਕ"
+        }
+    },
+    te: {
+        title: "వివాహ బయోడేటా",
+        invocation: "|| శ్రీ గణేశాయ నమః ||",
+        labels: {
+            details: "బయోడేటా వివరాలు",
+            add_field: "+ అదనపు సమాచారం",
+            generate: "డౌన్‌లోడ్",
+            name: "పూర్తి పేరు",
+            photo: "ఫోటో",
+            age: "వయస్సు",
+            height: "ఎత్తు",
+            date_of_birth: "పుట్టిన తేదీ",
+            place_of_birth: "పుట్టిన స్థలం",
+            caste: "కులం",
+            phone: "ఫోన్ సంఖ్య",
+            education: "చదువు",
+            occupation: "ఉద్యోగం/వృత్తి",
+            income: "ఆదాయం",
+            "father's_occupation": "తండ్రి వృత్తి",
+            "mother's_occupation": "తల్లి వృత్తి",
+            siblings: "తోబుట్టువులు",
+            address: "చిరునామా",
+            hobbies: "అభిరుచులు"
+        }
+    },
+    kn: {
+        title: "ಮದುವೆಯ ಬಯೋಡೇಟಾ",
+        invocation: "|| ಶ್ರೀ ಗಣೇಶಾಯ ನಮಃ ||",
+        labels: {
+            details: "ಬಯೋಡೇಟಾ ವಿವರಗಳು",
+            add_field: "+ ಹೊಸ ಮಾಹಿತಿ ಸೇರಿಸಿ",
+            generate: "ಡೌನ್‌ಲೋಡ್",
+            name: "ಪೂರ್ಣ ಹೆಸರು",
+            photo: "ಫೋಟೋ",
+            age: "ವಯಸ್ಸು",
+            height: "ಎತ್ತರ",
+            date_of_birth: "ಹುಟ್ಟಿದ ದಿನಾಂಕ",
+            place_of_birth: "ಹುಟ್ಟಿದ ಸ್ಥಳ",
+            caste: "ಜಾತಿ",
+            phone: "ಫೋನ್ ಸಂಖ್ಯೆ",
+            education: "ವಿದ್ಯಾಭ್ಯಾಸ",
+            occupation: "ಉದ್ಯೋಗ",
+            income: "ಆದಾಯ",
+            "father's_occupation": "ತಂದೆಯ ಉದ್ಯೋಗ",
+            "mother's_occupation": "ತಾಯಿಯ ಉದ್ಯೋಗ",
+            siblings: "ಸಹೋದರ ಸಹೋದರಿಯರು",
+            address: "ವಿಳಾಸ",
+            hobbies: "ಅಭಿರುಚಿಗಳು"
+        }
     }
 };

@@ -133,12 +133,16 @@ export default function Editor() {
                                 { id: 'ta', label: 'Tamil' },
                                 { id: 'mr', label: 'Marathi' },
                                 { id: 'ml', label: 'Malayalam' },
-                                { id: 'bh', label: 'Bhojpuri' }
+                                { id: 'bh', label: 'Bhojpuri' },
+                                { id: 'pa', label: 'Punjabi' },
+                                { id: 'ur', label: 'Urdu' },
+                                { id: 'te', label: 'Telugu' },
+                                { id: 'kn', label: 'Kannada' }
                             ].map((l) => (
                                 <button
                                     key={l.id}
                                     onClick={() => setLang(l.id)}
-                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${lang === l.id ? 'bg-primary-500 text-white border-primary-500 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border cursor-pointer ${lang === l.id ? 'bg-primary-500 text-white border-primary-500 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                                 >
                                     {l.label}
                                 </button>
@@ -167,7 +171,7 @@ export default function Editor() {
                                     setTemplate("bloom");
                                     setTheme({ primary: "#4a6c8c", background: "#f0f9ff" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'bloom' ? 'bg-sky-50 border-sky-300 text-sky-700 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'bloom' ? 'bg-sky-50 border-sky-300 text-sky-700 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Bloom
                             </button>
@@ -176,7 +180,7 @@ export default function Editor() {
                                     setTemplate("classic");
                                     setTheme({ primary: "#d63384", background: "#fdf2f8" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'classic' ? 'bg-pink-50 border-pink-300 text-pink-700 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'classic' ? 'bg-pink-50 border-pink-300 text-pink-700 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Classic
                             </button>
@@ -185,7 +189,7 @@ export default function Editor() {
                                     setTemplate("royal");
                                     setTheme({ primary: "#b45309", background: "#fffbeb" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'royal' ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'royal' ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Royal
                             </button>
@@ -194,7 +198,7 @@ export default function Editor() {
                                     setTemplate("modern");
                                     setTheme({ primary: "#059669", background: "#f8fafc" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'modern' ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'modern' ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Modern
                             </button>
@@ -203,7 +207,7 @@ export default function Editor() {
                                     setTemplate("sanskriti");
                                     setTheme({ primary: "#8b4513", background: "#fff8f0" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'sanskriti' ? 'bg-orange-50 border-orange-200 text-orange-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'sanskriti' ? 'bg-orange-50 border-orange-200 text-orange-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Sanskriti
                             </button>
@@ -212,7 +216,7 @@ export default function Editor() {
                                     setTemplate("vedika");
                                     setTheme({ primary: "#334155", background: "#ffffff" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'vedika' ? 'bg-slate-50 border-slate-200 text-slate-800 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'vedika' ? 'bg-slate-50 border-slate-200 text-slate-800 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Vedika
                             </button>
@@ -221,7 +225,7 @@ export default function Editor() {
                                     setTemplate("utsav");
                                     setTheme({ primary: "#ff7043", background: "#ffffff" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'utsav' ? 'bg-orange-50 border-orange-300 text-orange-600 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'utsav' ? 'bg-orange-50 border-orange-300 text-orange-600 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Utsav
                             </button>
@@ -230,7 +234,7 @@ export default function Editor() {
                                     setTemplate("shagun");
                                     setTheme({ primary: "#ef4444", background: "#fef6e4" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'shagun' ? 'bg-red-50 border-red-200 text-red-700 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'shagun' ? 'bg-red-50 border-red-200 text-red-700 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Shagun
                             </button>
@@ -239,9 +243,36 @@ export default function Editor() {
                                     setTemplate("aangan");
                                     setTheme({ primary: "#4a6c8c", background: "#f9f9f9" });
                                 }}
-                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border ${template === 'aangan' ? 'bg-slate-50 border-slate-200 text-slate-600 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'aangan' ? 'bg-slate-50 border-slate-200 text-slate-600 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                             >
                                 Aangan
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTemplate("vedika");
+                                    setTheme({ primary: "#047857", background: "#f0fdf4" });
+                                }}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'vedika' && theme.primary === "#047857" ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                            >
+                                Nikah
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTemplate("shagun");
+                                    setTheme({ primary: "#991b1b", background: "#fff1f2" });
+                                }}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'shagun' && theme.primary === "#991b1b" ? 'bg-red-50 border-red-300 text-red-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                            >
+                                Vivah
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTemplate("royal");
+                                    setTheme({ primary: "#854d0e", background: "#fefce8" });
+                                }}
+                                className={`flex-1 min-w-[30%] py-1.5 px-3 rounded-lg text-[11px] font-bold transition-all border cursor-pointer ${template === 'royal' && theme.primary === "#854d0e" ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                            >
+                                Mangal
                             </button>
                         </div>
                     </div>
@@ -262,27 +293,28 @@ export default function Editor() {
                 <div className="glass-panel p-4 shadow-sm border border-slate-200 rounded-xl flex items-center gap-4 bg-white/60">
                     <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider ml-2">Themes</h3>
                     <div className="flex gap-3 flex-wrap">
-                        {/* Theme 1 - Blue */}
-                        <div
-                            onClick={() => setTheme({ primary: "#4a6c8c", background: "#f0f9ff" })}
-                            className={`w-8 h-8 rounded-full cursor-pointer shadow-sm border-2 transition-transform hover:scale-110 ${theme.primary === "#4a6c8c" ? "border-slate-800 scale-110" : "border-white"}`}
-                            style={{ background: "#4a6c8c" }}
-                            title="Blue Theme"
-                        />
-                        {/* Theme 2 - Pink */}
-                        <div
-                            onClick={() => setTheme({ primary: "#d63384", background: "#fdf2f8" })}
-                            className={`w-8 h-8 rounded-full cursor-pointer shadow-sm border-2 transition-transform hover:scale-110 ${theme.primary === "#d63384" ? "border-slate-800 scale-110" : "border-white"}`}
-                            style={{ background: "#d63384" }}
-                            title="Pink Theme"
-                        />
-                        {/* Theme 3 - Green */}
-                        <div
-                            onClick={() => setTheme({ primary: "#198754", background: "#f0fdf4" })}
-                            className={`w-8 h-8 rounded-full cursor-pointer shadow-sm border-2 transition-transform hover:scale-110 ${theme.primary === "#198754" ? "border-slate-800 scale-110" : "border-white"}`}
-                            style={{ background: "#198754" }}
-                            title="Green Theme"
-                        />
+                        {[
+                            { name: 'Sky Blue', primary: "#4a6c8c", background: "#f0f9ff" },
+                            { name: 'Classic Pink', primary: "#d63384", background: "#fdf2f8" },
+                            { name: 'Emerald Green', primary: "#198754", background: "#f0fdf4" },
+                            { name: 'Royal Amber', primary: "#b45309", background: "#fffbeb" },
+                            { name: 'Luxury Violet', primary: "#7c3aed", background: "#f5f3ff" },
+                            { name: 'Deep Teal', primary: "#0d9488", background: "#f0fdfa" },
+                            { name: 'Rich Burgundy', primary: "#991b1b", background: "#fef2f2" },
+                            { name: 'Modern Slate', primary: "#334155", background: "#f8fafc" },
+                            { name: 'Sunset Orange', primary: "#f97316", background: "#fff7ed" },
+                            { name: 'Indigo Night', primary: "#4f46e5", background: "#eef2ff" },
+                            { name: 'Golden Sand', primary: "#ca8a04", background: "#fefce8" },
+                            { name: 'Rose Petal', primary: "#e11d48", background: "#fff1f2" }
+                        ].map((t) => (
+                            <div
+                                key={t.name}
+                                onClick={() => setTheme({ primary: t.primary, background: t.background })}
+                                className={`w-8 h-8 rounded-full cursor-pointer shadow-sm border-2 transition-all hover:scale-110 active:scale-95 ${theme.primary === t.primary ? "border-slate-800 ring-2 ring-primary-50 ring-offset-1 scale-110" : "border-white"}`}
+                                style={{ background: t.primary }}
+                                title={t.name}
+                            />
+                        ))}
                     </div>
                 </div>
 

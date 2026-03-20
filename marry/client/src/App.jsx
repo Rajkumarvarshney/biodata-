@@ -15,7 +15,7 @@ function App() {
                         M
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-xl font-bold text-slate-800 tracking-tight leading-none cursor-default">
+                        <h1 className="text-xl font-bold text-slate-800 tracking-tight leading-none cursor-pointer">
                             Marry<span className="text-primary-600">Builder</span>
                         </h1>
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Premium Collection</span>

@@ -16,6 +16,26 @@
 @layer base {
   body {
     @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    cursor: default;
+  }
+
+  /* Universal pointer for all interactive elements to ensure consistent feedback */
+  button,
+  a,
+  [role="button"],
+  label,
+  input[type="button"],
+  input[type="submit"],
+  .cursor-pointer,
+  .glass-panel button {
+    cursor: pointer !important;
+  }
+
+  /* Specifically target common interactive areas in this app */
+  .flex.gap-2 button,
+  .flex.gap-3 div[onClick],
+  .language-selector-button {
+    cursor: pointer !important;
   }
 }
 
