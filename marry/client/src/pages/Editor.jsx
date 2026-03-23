@@ -88,6 +88,7 @@ export default function Editor() {
                 quality: 0.8, // Slightly higher for clarity
                 pixelRatio: 2, // 2x gives professional print quality
                 cacheBust: true,
+                skipFonts: true, // Skip font embedding to avoid undefined font errors
                 style: {
                     transform: 'scale(1)',
                     transformOrigin: 'top left'
@@ -277,8 +278,11 @@ export default function Editor() {
                     <div className="w-full mt-16 p-2 md:flex-1 md:h-0 md:overflow-y-auto custom-scrollbar">
                         <div
                             ref={previewRef}
-                            className="w-full bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mx-auto"
-                            style={{ aspectRatio: '1 / 1.414', maxWidth: '650px' }}
+                            className="w-full bg-white rounded-xl shadow-sm border border-slate-100 mx-auto origin-top"
+                            style={{
+                                width: '100%',
+                                maxWidth: '650px'
+                            }}
                         >
                             <TemplateRenderer
                                 data={{ name, fields, photo }}

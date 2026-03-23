@@ -14,7 +14,7 @@ export default function RoyalTemplate({ data, theme, font, lang = 'en', invocati
 
     return (
         <div
-            className="w-full h-full relative flex flex-col transition-all duration-500 overflow-hidden"
+            className="w-full relative flex flex-col transition-all duration-500 overflow-hidden"
             style={{
                 backgroundColor: bg,
                 fontFamily: fontMap[font] || "'Playfair Display', serif",

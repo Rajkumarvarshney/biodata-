@@ -13,7 +13,7 @@ export default function ClassicTemplate({ data, theme, font, lang = 'en', invoca
 
     return (
         <div
-            className="text-slate-900 border-x-4 shadow-[0_0_15px_rgba(0,0,0,0.05)] flex flex-col h-full relative transition-colors duration-500 overflow-hidden"
+            className="text-slate-900 border-x-4 shadow-[0_0_15px_rgba(0,0,0,0.05)] flex flex-col relative transition-colors duration-500 overflow-hidden"
             style={{
                 borderColor: dynamicPrimary,
                 backgroundColor: dynamicBg,

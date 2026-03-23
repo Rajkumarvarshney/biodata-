@@ -13,7 +13,7 @@ export default function AanganTemplate({ data, theme, font, lang = 'en', invocat
 
     return (
         <div
-            className="w-full h-full relative flex flex-col transition-all duration-500 overflow-hidden items-center p-8"
+            className="w-full relative flex flex-col transition-all duration-500 overflow-hidden items-center p-8"
             style={{
                 backgroundColor: bg,
                 fontFamily: fontMap[font] || "'Outfit', sans-serif",

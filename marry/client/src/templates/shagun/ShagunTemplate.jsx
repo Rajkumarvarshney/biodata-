@@ -13,7 +13,7 @@ export default function ShagunTemplate({ data, theme, font, lang = 'en', invocat
 
     return (
         <div
-            className="w-full h-full relative flex flex-col transition-all duration-500 overflow-hidden items-center justify-center p-8 bg-slate-50"
+            className="w-full relative flex flex-col transition-all duration-500 overflow-hidden items-center justify-center p-8 bg-slate-50"
             style={{
                 fontFamily: fontMap[font] || "'Playfair Display', serif",
                 fontSize: `${fontSize}px`,
@@ -21,11 +21,11 @@ export default function ShagunTemplate({ data, theme, font, lang = 'en', invocat
         >
             {/* Decorative Cultural Backdrop */}
             <div className="absolute inset-x-0 bottom-0 top-0 overflow-hidden pointer-events-none opacity-40 -skew-x-12 translate-x-1/2">
-                <div className="w-[80vw] h-full" style={{ background: bg }} />
+                <div className="w-[80vw] h-[120%]" style={{ background: bg }} />
             </div>
 
             <div
-                className="w-full h-full relative z-10 p-8 shadow-2xl rounded-3xl overflow-hidden border-2 flex flex-col items-center"
+                className="w-full relative z-10 p-8 shadow-2xl rounded-3xl overflow-hidden border-2 flex flex-col items-center"
                 style={{ backgroundColor: bg, borderColor: `${primary}11` }}
             >
                 <div className="absolute top-0 inset-x-0 h-2 opacity-60" style={{ backgroundColor: primary }} />

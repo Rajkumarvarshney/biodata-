@@ -22,7 +22,7 @@ export default function SanskritiPremium({ data, font, theme, lang = 'en', invoc
 
   return (
     <div
-      className="w-full h-full relative transition-all duration-700 flex flex-col"
+      className="w-full relative transition-all duration-700 flex flex-col"
       style={{
         backgroundColor: bg,
         fontFamily: fontMap[font] || "'Playfair Display', serif",
