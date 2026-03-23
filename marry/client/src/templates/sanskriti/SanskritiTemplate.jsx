@@ -13,7 +13,7 @@ export default function SanskritiTemplate({ data, theme, font, lang = 'en', invo
 
     return (
         <div
-            className="w-full relative flex flex-col transition-all duration-500 overflow-hidden"
+            className="w-full h-full relative flex flex-col transition-all duration-500 overflow-hidden"
             style={{
                 backgroundColor: bg,
                 fontFamily: fontMap[font] || "'Playfair Display', serif",

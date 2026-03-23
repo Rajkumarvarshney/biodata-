@@ -13,7 +13,7 @@ export default function BloomTemplate({ data, theme, font, lang = 'en', invocati
 
     return (
         <div
-            className="w-full relative overflow-hidden transition-all duration-700 flex flex-col cursor-default"
+            className="w-full h-full relative overflow-hidden transition-all duration-700 flex flex-col cursor-default"
             style={{
                 backgroundColor: dynamicBg,
                 fontFamily: fontMap[font] || "'Playfair Display', serif",
