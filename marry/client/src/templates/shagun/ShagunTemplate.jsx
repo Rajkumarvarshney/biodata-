@@ -21,7 +21,7 @@ export default function ShagunTemplate({ data, theme, font, lang = 'en', invocat
         >
             {/* Decorative Cultural Backdrop */}
             <div className="absolute inset-x-0 bottom-0 top-0 overflow-hidden pointer-events-none opacity-40 -skew-x-12 translate-x-1/2">
-                <div className="w-[80vw] h-full" style={{ background: bg }} />
+                <div className="w-[80vw] h-[120%]" style={{ background: bg }} />
             </div>
 
             <div

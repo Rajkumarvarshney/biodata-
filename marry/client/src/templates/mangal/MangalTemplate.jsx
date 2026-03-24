@@ -40,13 +40,13 @@ export default function MangalTemplate({ data, theme, font, lang = 'en', invocat
                 <div className="flex items-start gap-8 mb-10">
                     {photo && (
                         <div className="relative shrink-0 flex-1">
-                            <div className="w-full h-full rounded-2xl border-2 border-white shadow-2xl overflow-hidden aspect-[4/5]" style={{ borderColor: `${primary}33` }}>
+                            <div className="w-full rounded-2xl border-2 border-white shadow-2xl overflow-hidden aspect-[4/5]" style={{ borderColor: `${primary}33` }}>
                                 <img src={photo} alt="" className="w-full h-full object-cover" />
                             </div>
                         </div>
                     )}
 
-                    <div className="flex-[2] flex flex-col justify-center h-full py-4">
+                    <div className="flex-[2] flex flex-col justify-center py-4">
                         <h1
                             className="font-black text-left leading-none mb-4 uppercase tracking-tighter"
                             style={{ fontSize: nameSize * 1.3, color: primary, fontFamily: 'inherit' }}

@@ -17,11 +17,31 @@ export default function Editor() {
     const [name, setName] = useState("");
     const [photo, setPhoto] = useState("");
     const previewRef = useRef(null);
+    const downloadRef = useRef(null);
+    const modalContainerRef = useRef(null);
     const [isDownloading, setIsDownloading] = useState(false);
     const [showPayment, setShowPayment] = useState(false);
     const [hasPaid, setHasPaid] = useState(false);
+    const [showDownloadModal, setShowDownloadModal] = useState(false);
+    const [modalScale, setModalScale] = useState(1);
 
     const t = translations[lang] || translations.en;
+
+    // Calculate scale for download modal based on container width
+    useEffect(() => {
+        if (showDownloadModal && modalContainerRef.current) {
+            const calculateScale = () => {
+                const containerWidth = modalContainerRef.current.clientWidth;
+                // A4 width is 794px, scale down if container is smaller
+                const scale = Math.min(1, containerWidth / 794);
+                setModalScale(scale);
+            };
+            
+            calculateScale();
+            window.addEventListener('resize', calculateScale);
+            return () => window.removeEventListener('resize', calculateScale);
+        }
+    }, [showDownloadModal]);
 
     // Standard fields mapping to allow cross-language updates
     const standardFieldsKeys = {
@@ -78,19 +98,37 @@ export default function Editor() {
             return;
         }
 
+        // Show download modal first
+        setShowDownloadModal(true);
         setIsDownloading(true);
+
+        // Wait for modal to render
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const element = downloadRef.current;
+        if (!element) {
+            alert("Download preview not ready. Please try again.");
+            setShowDownloadModal(false);
+            setIsDownloading(false);
+            return;
+        }
+
         try {
-            // Give a tiny moment for all SVG/images to settle
+            // Wait a bit more for images to load
             await new Promise(resolve => setTimeout(resolve, 500));
 
-            // 🔥 FILE SIZE OPTIMIZATION: JPEG + Lower pixelRatio = Smallest PDF
-            const dataUrl = await toJpeg(previewRef.current, {
-                quality: 0.8, // Slightly higher for clarity
-                pixelRatio: 2, // 2x gives professional print quality
+            // Capture the modal content with A4 dimensions at 2x for quality
+            const dataUrl = await toJpeg(element, {
+                quality: 0.95,
+                pixelRatio: 2,
                 cacheBust: true,
+                skipFonts: true,
+                backgroundColor: '#ffffff',
                 style: {
                     transform: 'scale(1)',
-                    transformOrigin: 'top left'
+                    transformOrigin: 'top left',
+                    margin: '0',
+                    padding: '0'
                 }
             });
 
@@ -98,14 +136,15 @@ export default function Editor() {
                 orientation: "portrait",
                 unit: "mm",
                 format: "a4",
-                compress: true, // Enable internal PDF compression
+                compress: true,
             });
 
-            const imgProps = pdf.getImageProperties(dataUrl);
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-            // Using JPEG with 'FAST' compression for smallest size
+            // Use exact A4 dimensions - the captured image should already be A4 aspect ratio
+            // since the container is 794px x 1123px (which is A4 at 96 DPI)
+            const pdfWidth = 210;  // A4 width in mm
+            const pdfHeight = 297; // A4 height in mm
+            
+            // Fill entire PDF page edge-to-edge
             pdf.addImage(dataUrl, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
             pdf.save(`${name || "biodata"}.pdf`);
 
@@ -113,6 +152,8 @@ export default function Editor() {
             console.error("Error generating PDF:", error);
             alert("Failed to generate PDF. Please try again.");
         } finally {
+            // Close modal and reset state
+            setShowDownloadModal(false);
             setIsDownloading(false);
         }
     };
@@ -277,8 +318,11 @@ export default function Editor() {
                     <div className="w-full mt-16 p-2 md:flex-1 md:h-0 md:overflow-y-auto custom-scrollbar">
                         <div
                             ref={previewRef}
-                            className="w-full bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mx-auto"
-                            style={{ aspectRatio: '1 / 1.414', maxWidth: '650px' }}
+                            className="w-full bg-white rounded-xl shadow-sm border border-slate-100 mx-auto origin-top"
+                            style={{
+                                width: '100%',
+                                maxWidth: '650px'
+                            }}
                         >
                             <TemplateRenderer
                                 data={{ name, fields, photo }}
@@ -362,6 +406,54 @@ export default function Editor() {
                                 >
                                     Maybe later
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* DOWNLOAD MODAL - Shows A4 preview during PDF generation */}
+            {showDownloadModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200 animate-scale-in max-w-4xl w-full">
+                        <div className="p-4 bg-gradient-to-r from-primary-600 to-indigo-700 flex justify-between items-center">
+                            <div className="flex items-center gap-3">
+                                <div className="animate-spin h-5 w-5 border-2 border-white/30 border-t-white rounded-full" />
+                                <span className="text-white font-bold">Preparing Your Biodata...</span>
+                            </div>
+                            <span className="text-white/70 text-sm">A4 Format</span>
+                        </div>
+                        <div 
+                            ref={modalContainerRef}
+                            className="p-4 md:p-6 flex justify-center bg-slate-50 overflow-auto max-h-[70vh]"
+                        >
+                            {/* Scaled wrapper for mobile - maintains A4 ratio but scales down to fit */}
+                            <div 
+                                className="relative"
+                                style={{
+                                    width: `${794 * modalScale}px`,
+                                    height: `${1123 * modalScale}px`,
+                                }}
+                            >
+                                <div
+                                    ref={downloadRef}
+                                    className="bg-white shadow-lg"
+                                    style={{
+                                        width: '794px',
+                                        height: '1123px',
+                                        transform: `scale(${modalScale})`,
+                                        transformOrigin: 'top left'
+                                    }}
+                                >
+                                    <TemplateRenderer
+                                        data={{ name, fields, photo }}
+                                        template={template}
+                                        theme={theme}
+                                        font={font}
+                                        lang={lang}
+                                        invocation={invocation}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
