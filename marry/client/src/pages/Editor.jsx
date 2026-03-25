@@ -202,8 +202,8 @@ export default function Editor() {
                         />
                     </div>
 
-                    {/* Template Selector */}
-                    <div className="mb-6">
+                    {/* Laptop Template Selector */}
+                    <div className="mb-6 hidden md:block">
                         <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2">Templates</h3>
                         <div className="flex gap-2 overflow-x-auto pb-4 -mx-1 px-1 snap-x snap-mandatory no-scrollbar">
                             {[
@@ -288,6 +288,37 @@ export default function Editor() {
                                 {f}
                             </button>
                         ))}
+                    </div>
+                </div>
+
+                {/* Phone Template Selector */}
+                <div className="block md:hidden glass-panel p-4 py-2">
+                    <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Templates</h3>
+                    <div className="flex gap-2 overflow-x-auto pb-4 -mx-1 px-1 snap-x snap-mandatory no-scrollbar">
+                        {[
+                            { id: 'bloom', label: 'Bloom', primary: "#4a6c8c", bg: "#f0f9ff", highlight: 'bg-sky-50 border-sky-300 text-sky-700' },
+                            { id: 'royal', label: 'Royal', primary: "#b45309", bg: "#fffbeb", highlight: 'bg-amber-50 border-amber-300 text-amber-900' },
+                            { id: 'sanskriti', label: 'Sanskriti', primary: "#8b4513", bg: "#fff8f0", highlight: 'bg-orange-50 border-orange-200 text-orange-900' },
+                            { id: 'sanskriti-premium', label: 'Sanskriti Premium', primary: "#b45309", bg: "#f6efe4", highlight: 'bg-amber-50 border-amber-500 text-amber-900' },
+                            { id: 'modern', label: 'Modern', primary: "#059669", bg: "#f8fafc", highlight: 'bg-emerald-50 border-emerald-300 text-emerald-900' },
+                            { id: 'aangan', label: 'Aangan', primary: "#4a6c8c", bg: "#f9f9f9", highlight: 'bg-slate-50 border-slate-200 text-slate-600', isFree: true },
+                            { id: 'mangal', label: 'Mangal', primary: "#854d0e", bg: "#fefce8", highlight: 'bg-amber-50 border-amber-300 text-amber-900' }
+                        ].map((btn) => {
+                            const isSelected = template === btn.id && theme.primary.toLowerCase() === btn.primary.toLowerCase();
+                            return (
+                                <button
+                                    key={btn.label}
+                                    onClick={() => {
+                                        setTemplate(btn.id);
+                                        setTheme({ primary: btn.primary, background: btn.bg });
+                                    }}
+                                    className={`min-w-[100px] py-1.5 px-3 rounded-lg text-[10px] md:text-[11px] font-bold transition-all border cursor-pointer relative shrink-0 snap-start ${isSelected ? btn.highlight + ' shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                                >
+                                    {btn.label}
+                                    {btn.isFree && <span className="absolute -top-1 -right-1 px-1 bg-green-500 text-white text-[8px] rounded-full uppercase">FREE</span>}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
 
